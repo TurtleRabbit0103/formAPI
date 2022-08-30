@@ -1,8 +1,7 @@
 import { Router } from 'express';
 
 // project imports
-//import user from 'stx-api/routes/user';
-import form from './form'
+import form from '@bonk-rest/api/form'
 
 // guaranteed to get dependencies
 export default () => {
