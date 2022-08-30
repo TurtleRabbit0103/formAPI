@@ -1,7 +1,10 @@
 import express, { NextFunction, Request, Response } from 'express';
 import bodyParser from 'body-parser';
-import routes from './route'
 import path from 'path'
+
+// project imports
+import routes from '@bonk-rest/index'
+import config from '@bonk-config/index';
 
 
 // project imports
@@ -16,14 +19,14 @@ export default async ({ app }: { app: express.Application }) => {
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(express.json({ limit: '50mb' }));
     app.set('view engine', 'ejs');
-    app.set('views', path.join(__dirname, 'views'));
+    app.set('views', path.join(process.cwd(), '/src', 'views'));
 
     // static files
     app.use(express.static(process.cwd() + '/src/public/'));
 
     // For /api prefix
-    //app.use(config.api.prefix, routes());
-    app.use(routes());
+    app.use(config.api.prefix, routes());
+    // app.use(routes());
 
     /// error handlers
     app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
@@ -33,6 +36,7 @@ export default async ({ app }: { app: express.Application }) => {
             next(err);
         }
     });
+
     // Return the express app
     return app;
 }

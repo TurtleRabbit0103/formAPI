@@ -3,9 +3,9 @@ import { Router, Request, Response, NextFunction } from 'express';
 const route = Router();
 
 export default (app: Router) => {
-    app.use('/', route);
+    app.use('/form', route);
 
-    route.get('/',getName);
+    route.get('/', getName);
     // route.post('/add', mw.isAuth, addBranch);
 };
 
